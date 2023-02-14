@@ -3,6 +3,7 @@ const {
   respondToSslCheck,
 } = require("@slack/bolt/dist/receivers/ExpressReceiver");
 const { Configuration, OpenAIApi } = require("openai");
+require("dotenv").config();
 
 // Configuration for Open AI
 const configuration = new Configuration({
