@@ -3,12 +3,7 @@ const {
   respondToSslCheck,
 } = require("@slack/bolt/dist/receivers/ExpressReceiver");
 const { Configuration, OpenAIApi } = require("openai");
-const express = require("express");
-const serverless = require("serverless-http");
 require("dotenv").config();
-
-const netlify_app = express();
-const router = express.Router();
 
 // Configuration for Open AI
 const configuration = new Configuration({
@@ -17,7 +12,6 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-router.get("/", (req, res) => {
   //Slack App Configuration
   const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
@@ -72,8 +66,3 @@ router.get("/", (req, res) => {
 
     console.log("⚡️ Bolt app is running!");
   })();
-});
-
-netlify_app.use("/.netlify/functions/app", router);
-
-module.exports.handler = serverless(netlify_app);
